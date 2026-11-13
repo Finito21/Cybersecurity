@@ -17,6 +17,7 @@
 - [ ] Links to sections (`#anchor`) work in both languages
 - [ ] No emojis or decorative icons
 - [ ] Checked in light and dark mode, and at phone width (for styling changes)
+- [ ] `python -m unittest discover -s tests` passes
 - [ ] `python scripts/check_translations.py` passes
 - [ ] `mkdocs build --strict` passes
 
