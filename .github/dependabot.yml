@@ -1,0 +1,30 @@
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 7
+    # MkDocs 2.0 is a rewrite without plugin support and does not work with
+    # Material or mkdocs-static-i18n; stay on 1.x until the site migrates.
+    ignore:
+      - dependency-name: mkdocs
+        update-types: ["version-update:semver-major"]
+    groups:
+      # minor and patch updates in one PR; a major update gets its own PR
+      mkdocs:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 7
+    groups:
+      # minor and patch updates in one PR; a major update gets its own PR
+      actions:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]

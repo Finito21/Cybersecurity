@@ -1,0 +1,28 @@
+name: Content error
+description: A fact, definition, example or command is wrong or out of date.
+labels: [content]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: Link to the page (Polish or English).
+      placeholder: https://finito21.github.io/Cybersecurity/web/sql_injection/
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong
+      description: Quote the sentence or command and explain the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: fix
+    attributes:
+      label: Suggested correction
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: OWASP, CWE/CVE, official documentation or a standard.

@@ -1,0 +1,27 @@
+name: Translation
+description: The Polish and English versions differ, or a translation reads badly.
+labels: [translation]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: Link to the page.
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language with the problem
+      options:
+        - English
+        - Polish
+        - Both (the versions differ)
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Current text and suggested wording
+    validations:
+      required: true

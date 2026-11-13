@@ -1,0 +1,49 @@
+name: Checks
+
+on:
+  pull_request:
+  workflow_dispatch:
+  # Reused by deploy.yml, so the build that passed the checks is the one deployed.
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.ref }}
+  # Cancel superseded PR runs only; never cancel a run that feeds a deploy.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version-file: .python-version
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies (hashed lock)
+        run: pip install --require-hashes -r requirements.txt
+
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Check translations
+        run: python scripts/check_translations.py
+
+      - name: Build site
+        run: mkdocs build --strict
+
+      # Only a deploy uses the artifact; pull request runs skip the upload.
+      - name: Upload site artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: site

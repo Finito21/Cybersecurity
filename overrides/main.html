@@ -1,0 +1,36 @@
+{#- Social cards (Open Graph, Twitter), raster icons for browsers that do not use the
+    SVG favicon and the toolbar colour of mobile browsers. -#}
+{% extends "base.html" %}
+{#- Archivo needs its width axis (wdth) for the condensed headings, which theme.font
+    cannot request. The privacy plugin downloads these files at build time. -#}
+{% block fonts %}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..700;1,100,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+{% endblock %}
+{% block extrahead %}
+  {{ super() }}
+  {%- set title = (page.title ~ " - " ~ config.site_name) if page and page.title and not page.is_homepage else config.site_name -%}
+  {%- set description = (page.meta.description if page and page.meta and page.meta.description else config.site_description) -%}
+  {%- set image = config.site_url ~ "assets/images/social-preview.png" -%}
+  {%- set english = config.theme.language == "en" -%}
+  <meta property="og:type" content="{{ 'website' if not page or page.is_homepage else 'article' }}">
+  <meta property="og:site_name" content="{{ config.site_name | e }}">
+  <meta property="og:title" content="{{ title | e }}">
+  <meta property="og:description" content="{{ description | e }}">
+  {%- if page and page.canonical_url %}
+  <meta property="og:url" content="{{ page.canonical_url }}">
+  {%- endif %}
+  <meta property="og:locale" content="{{ 'en_GB' if english else 'pl_PL' }}">
+  <meta property="og:locale:alternate" content="{{ 'pl_PL' if english else 'en_GB' }}">
+  <meta property="og:image" content="{{ image }}">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="640">
+  <meta property="og:image:alt" content="Cybersecurity Notes">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title | e }}">
+  <meta name="twitter:description" content="{{ description | e }}">
+  <meta name="twitter:image" content="{{ image }}">
+  <link rel="icon" type="image/png" sizes="48x48" href="{{ config.site_url }}assets/images/favicon-48.png">
+  <link rel="apple-touch-icon" href="{{ config.site_url }}assets/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#141615" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f3f4f3" media="(prefers-color-scheme: light)">
+{% endblock %}

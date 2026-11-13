@@ -1,0 +1,27 @@
+# MkDocs build output
+site/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.cache/
+
+# Claude Code personal settings
+.claude/settings.local.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Secrets and local-only files (the repository is public)
+.env
+.env.*
+*.pem
+*.key
+*.p12
+CLAUDE.local.md
+.mcp.json
+venv/

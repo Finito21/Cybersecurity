@@ -1,0 +1,198 @@
+site_name: Cybersecurity Notes
+site_description: "Uporządkowane notatki z cyberbezpieczeństwa: testy penetracyjne aplikacji webowych, bezpieczeństwo sieci, analiza logów i obrona systemów."
+site_author: Grzegorz Zięba
+site_url: https://finito21.github.io/Cybersecurity/
+repo_url: https://github.com/Finito21/Cybersecurity
+repo_name: Finito21/Cybersecurity
+copyright: Notatki tworzone na własny użytek edukacyjny · Grzegorz Zięba · Treść na licencji <a href="https://creativecommons.org/licenses/by/4.0/deed.pl">CC BY 4.0</a>
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: pl
+  icon:
+    repo: fontawesome/brands/github
+  favicon: assets/images/favicon.svg
+  # Archivo (variable width) and JetBrains Mono are linked in overrides/main.html
+  # (block fonts) and self-hosted at build time by the privacy plugin.
+  font: false
+  # Dark scheme is the default; the toggle switches to light and the choice is remembered.
+  palette:
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Przełącz na tryb jasny
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Przełącz na tryb ciemny
+  features:
+    # Sections in the top tabs, pages of the current section in the left sidebar,
+    # headings of the current page in the right sidebar, breadcrumbs above the H1
+    # and previous/next links in the footer.
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.indexes
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - navigation.tracking
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+    - content.tooltips
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
+
+hooks:
+  - hooks/typography.py
+  - hooks/search_per_language.py
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+extra_javascript:
+  - assets/javascripts/search-button.js
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Finito21
+      name: GitHub
+
+nav:
+  - Start: index.md
+
+  - Podstawy:
+      - fundamentals/index.md
+      - Pojęcia bezpieczeństwa: fundamentals/security_basics.md
+      - OWASP Top 10: fundamentals/owasp_top10.md
+      - Metodyka testu penetracyjnego: fundamentals/pentest_methodology.md
+      - Raport z testów: fundamentals/pentest_report.md
+      - Pytania rekrutacyjne: fundamentals/interview_questions.md
+
+  - Aplikacje webowe:
+      - web/index.md
+      - Kontrola dostępu i IDOR: web/access_control.md
+      - SQL Injection: web/sql_injection.md
+      - XSS: web/xss.md
+      - CSRF: web/csrf.md
+      - SSRF: web/ssrf.md
+      - XXE: web/xxe.md
+      - Pliki i ścieżki: web/files_and_paths.md
+      - Sesje i uwierzytelnianie: web/sessions.md
+      - Cache i nagłówki: web/cache_and_headers.md
+
+  - Sieci:
+      - network/index.md
+      - Bezpieczeństwo LAN: network/lan_security.md
+      - Listy ACL: network/acl.md
+      - Sieci bezprzewodowe: network/wireless.md
+      - Ataki DoS i DDoS: network/dos.md
+
+  - Obrona:
+      - defense/index.md
+      - Logi Windows: defense/windows_logs.md
+      - Linux: defense/linux_security.md
+      - NGINX: defense/nginx_hardening.md
+      - Backup i ransomware: defense/ransomware_backup.md
+      - Skanowanie podatności: defense/vulnerability_scanning.md
+
+  - OSINT: osint/index.md
+
+  - Narzędzia:
+      - tools/index.md
+      - Burp Suite: tools/burp_suite.md
+      - ZAP: tools/zap.md
+
+  - Źródła: resources.md
+
+plugins:
+  - search
+  # downloads Google Fonts (and any other external assets) at build time and serves
+  # them from the site, so visitors make no requests to third parties. Enabled in CI
+  # only: on Windows it cannot create the symlinks it uses, which fails a strict build.
+  - privacy:
+      enabled: !ENV [CI, false]
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      languages:
+        - locale: pl
+          name: Polski
+          build: true
+          default: true
+        - locale: en
+          name: English
+          build: true
+          site_description: "Structured notes on cybersecurity: web application penetration testing, network security, log analysis and the defence of systems."
+          copyright: Notes created for personal learning · Grzegorz Zięba · Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+          # merged item by item into theme.palette (slate first, then default),
+          # so only the labels change
+          theme:
+            palette:
+              - toggle:
+                  name: Switch to light mode
+              - toggle:
+                  name: Switch to dark mode
+          nav_translations:
+            Start: Home
+            Podstawy: Fundamentals
+            Pojęcia bezpieczeństwa: Security concepts
+            Metodyka testu penetracyjnego: Penetration test methodology
+            Raport z testów: Test report
+            Pytania rekrutacyjne: Interview questions
+            Aplikacje webowe: Web applications
+            Kontrola dostępu i IDOR: Access control and IDOR
+            Pliki i ścieżki: Files and paths
+            Sesje i uwierzytelnianie: Sessions and authentication
+            Cache i nagłówki: Cache and headers
+            Sieci: Networks
+            Bezpieczeństwo LAN: LAN security
+            Listy ACL: Access control lists
+            Sieci bezprzewodowe: Wireless networks
+            Ataki DoS i DDoS: DoS and DDoS attacks
+            Obrona: Defence
+            Logi Windows: Windows logs
+            Backup i ransomware: Backup and ransomware
+            Skanowanie podatności: Vulnerability scanning
+            Narzędzia: Tools
+            Źródła: Resources
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      toc_depth: 3
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format

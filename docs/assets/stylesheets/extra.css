@@ -1,0 +1,623 @@
+/* =========================================================
+   Cybersecurity Notes: dark-first theme
+   Archivo (variable width: condensed headings, normal body text)
+   and JetBrains Mono (code). Fonts are linked in overrides/main.html
+   and self-hosted by the privacy plugin.
+   Layout: section tabs on top, pages of the current section on the
+   left, headings of the current page on the right.
+   ========================================================= */
+
+:root {
+  --md-text-font: "Archivo";
+  --md-code-font: "JetBrains Mono";
+}
+
+/* ---------- colour tokens: dark (slate, default) ---------- */
+[data-md-color-scheme="slate"] {
+  --cs-bg: #141615;
+  --cs-panel: #1b1e1d;
+  --cs-panel-2: #232726;
+  --cs-line: #2e3331;
+  --cs-line-strong: #4a514d;
+  --cs-control-line: #707873;
+  --cs-fg: #e4e7e5;
+  --cs-fg-2: #c9cfcb;
+  --cs-muted: #a1a8a4;
+  --cs-inv-bg: #e4e7e5;
+  --cs-inv-fg: #141615;
+  --cs-code-bg: #0f1110;
+
+  --cs-tip-bg: #121c22;
+  --cs-tip-line: #2f5266;
+  --cs-tip-title: #8cc3e0;
+  --cs-warn-bg: #211d12;
+  --cs-warn-line: #6b5a2e;
+  --cs-warn-title: #e6c77a;
+  --cs-danger-bg: #241414;
+  --cs-danger-line: #6e3434;
+  --cs-danger-title: #f0a0a0;
+}
+
+/* ---------- colour tokens: light (default) ---------- */
+[data-md-color-scheme="default"] {
+  --cs-bg: #f3f4f3;
+  --cs-panel: #ffffff;
+  --cs-panel-2: #e9ecea;
+  --cs-line: #d3d8d5;
+  --cs-line-strong: #a9b0ac;
+  --cs-control-line: #7f8682;
+  --cs-fg: #161918;
+  --cs-fg-2: #373d3a;
+  --cs-muted: #59605c;
+  --cs-inv-bg: #161918;
+  --cs-inv-fg: #f3f4f3;
+  --cs-code-bg: #ffffff;
+
+  --cs-tip-bg: #e8f2f8;
+  --cs-tip-line: #7aa9c4;
+  --cs-tip-title: #1f5574;
+  --cs-warn-bg: #fbf3dc;
+  --cs-warn-line: #c9a13b;
+  --cs-warn-title: #6b4e00;
+  --cs-danger-bg: #fbe9e9;
+  --cs-danger-line: #d08a8a;
+  --cs-danger-title: #8a1f1f;
+}
+
+/* ---------- map the tokens onto Material's variables ---------- */
+[data-md-color-scheme="slate"],
+[data-md-color-scheme="default"] {
+  --md-default-bg-color: var(--cs-bg);
+  --md-default-fg-color: var(--cs-fg);
+  --md-default-fg-color--light: var(--cs-muted);
+  --md-default-fg-color--lighter: var(--cs-line-strong);
+  --md-default-fg-color--lightest: var(--cs-line);
+
+  /* header and tabs: same ground as the page, text in the page colour */
+  --md-primary-fg-color: var(--cs-bg);
+  --md-primary-fg-color--light: var(--cs-panel);
+  --md-primary-fg-color--dark: var(--cs-bg);
+  --md-primary-bg-color: var(--cs-fg);
+  --md-primary-bg-color--light: var(--cs-muted);
+  --md-accent-fg-color: var(--cs-fg);
+  --md-accent-bg-color: var(--cs-bg);
+  --md-accent-bg-color--light: var(--cs-muted);
+  --md-accent-fg-color--transparent: var(--cs-panel-2);
+
+  --md-typeset-color: var(--cs-fg-2);
+  --md-typeset-a-color: var(--cs-fg);
+  --md-typeset-mark-color: var(--cs-warn-bg);
+  --md-typeset-table-color: var(--cs-line);
+  --md-typeset-table-color--light: var(--cs-panel-2);
+
+  --md-code-bg-color: var(--cs-code-bg);
+  --md-code-fg-color: var(--cs-fg);
+
+  --md-footer-bg-color: var(--cs-bg);
+  --md-footer-bg-color--dark: var(--cs-bg);
+  --md-footer-fg-color: var(--cs-fg);
+  --md-footer-fg-color--light: var(--cs-muted);
+  --md-footer-fg-color--lighter: var(--cs-muted);
+
+  --md-admonition-bg-color: var(--cs-panel);
+  --md-admonition-fg-color: var(--cs-fg-2);
+
+  --md-shadow-z1: none;
+  --md-shadow-z2: none;
+  --md-shadow-z3: none;
+
+  --md-mermaid-font-family: var(--md-text-font-family);
+  --md-mermaid-edge-color: var(--cs-muted);
+  --md-mermaid-node-bg-color: var(--cs-panel-2);
+  --md-mermaid-node-fg-color: var(--cs-fg);
+  --md-mermaid-label-bg-color: var(--cs-bg);
+  --md-mermaid-label-fg-color: var(--cs-fg);
+}
+[data-md-color-scheme="slate"] { color-scheme: dark; }
+[data-md-color-scheme="default"] { color-scheme: light; }
+
+body { background-color: var(--cs-bg); }
+
+/* =========================================================
+   Header and section tabs
+   ========================================================= */
+.md-header {
+  border-bottom: 1px solid var(--cs-line);
+  box-shadow: none;
+}
+.md-header__topic:first-child {
+  font-weight: 700;
+  font-stretch: 85%;
+  font-size: 0.95rem;
+}
+.md-header__button.md-logo,
+.md-nav__title .md-nav__button.md-logo { display: none; }
+/* the site name links to the home page (overrides/partials/header.html) */
+.md-header .cs-home-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.md-header .cs-home-link:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+.md-header .cs-home-link:focus-visible { outline: 2px solid var(--cs-fg); outline-offset: 2px; }
+/* after scrolling, Material fades the site name out; take its link out of the Tab order too */
+.md-header__title--active .md-header__topic:first-child { visibility: hidden; }
+/* with tabs visible, line the site name up with the first tab ("Start"):
+   tabs start at 0.2rem + 0.6rem, the title at 0.2rem + its margin */
+@media screen and (min-width: 76.25em) {
+  [dir="ltr"] .md-header__title { margin-left: 0.6rem; }
+}
+
+.md-tabs {
+  border-bottom: 1px solid var(--cs-line);
+  color: var(--cs-fg-2);
+}
+.md-tabs__link {
+  font-size: 0.75rem;
+  opacity: 1;
+  margin-top: 0.5rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 2px solid transparent;
+  color: var(--cs-fg-2);
+  transition: color 0.12s ease, border-color 0.12s ease;
+}
+.md-tabs__link:hover { color: var(--cs-fg); border-bottom-color: var(--cs-line-strong); }
+.md-tabs__item--active .md-tabs__link {
+  color: var(--cs-fg);
+  font-weight: 600;
+  border-bottom-color: var(--cs-fg);
+}
+.md-tabs__link:focus-visible { outline: 2px solid var(--cs-fg); outline-offset: -2px; }
+
+/* search field and results */
+.md-search__form {
+  border-radius: 0;
+  background-color: var(--cs-panel);
+  border: 1px solid var(--cs-control-line);
+}
+.md-search__form:hover { background-color: var(--cs-panel-2); }
+.md-search__input,
+.md-search__input::placeholder,
+.md-search__icon { color: var(--cs-muted); }
+[data-md-toggle="search"]:checked ~ .md-header .md-search__form { border-radius: 0; }
+[data-md-toggle="search"]:checked ~ .md-header .md-search__input { color: var(--cs-fg); }
+.md-search__output { border-radius: 0; }
+.md-search__scrollwrap { background-color: var(--cs-panel); }
+.md-search-result__meta { background-color: var(--cs-panel-2); color: var(--cs-muted); }
+.md-search-result mark { color: var(--cs-fg); text-decoration: underline; }
+
+.md-header__button:focus-visible,
+.md-header__option label:focus-visible { outline: 2px solid var(--cs-fg); outline-offset: 2px; }
+
+/* =========================================================
+   Left sidebar: pages of the current section
+   ========================================================= */
+.md-nav { font-size: 0.72rem; }
+.md-nav__title { color: var(--cs-muted); }
+.md-nav__link { border-radius: 0; }
+
+@media screen and (min-width: 76.25em) {
+  /* framed only when a section is open; a top-level page without children
+     (e.g. Resources) would otherwise show an empty frame */
+  .md-sidebar--primary .md-nav--primary > .md-nav__list:has(> .md-nav__item--active.md-nav__item--section) {
+    border: 1px solid var(--cs-line);
+    background: var(--cs-panel);
+    padding: 0.3rem 0;
+  }
+  /* section label at the top of the list */
+  .md-sidebar--primary .md-nav--primary .md-nav__title,
+  .md-sidebar--primary .md-nav__item--section > .md-nav__link,
+  .md-sidebar--primary .md-nav__item--section > .md-nav__container > .md-nav__link {
+    font-weight: 700;
+    font-stretch: 85%;
+    font-size: 0.78rem;
+    color: var(--cs-fg);
+  }
+  .md-sidebar--primary .md-nav__link {
+    margin: 0;
+    padding: 0.32rem 0.6rem;
+    color: var(--cs-fg-2);
+  }
+  .md-sidebar--primary .md-nav__link:hover { background: var(--cs-panel-2); color: var(--cs-fg); }
+  /* Material indents list items; links carry their own padding, so highlights
+     run from edge to edge of the frame */
+  .md-sidebar--primary .md-nav__item { padding: 0; }
+  .md-sidebar--primary .md-nav__item--section > .md-nav { margin: 0; }
+  [dir] .md-sidebar--primary .md-nav__item > .md-nav__link { margin-left: 0; margin-right: 0; }
+  /* the sticky section label: same ground as the frame, no glow */
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav__link {
+    background: var(--cs-panel);
+    box-shadow: none;
+  }
+  /* section label with an index page: the wrapper has no padding of its own, so the
+     link inside (and its highlight on the index page) spans the full width */
+  .md-sidebar--primary .md-nav__container,
+  .md-sidebar--primary .md-nav__container:hover { padding: 0; background: transparent; }
+  .md-sidebar--primary .md-nav__container > a.md-nav__link { flex-grow: 1; padding: 0.32rem 0.6rem; }
+  .md-sidebar--primary .md-nav__item--section > .md-nav__container > label.md-nav__link { display: none; }
+  /* nothing to list on a top-level page without children: keep the column, hide its contents */
+  .md-sidebar--primary:not(:has(.md-nav__item--active.md-nav__item--section)) .md-sidebar__scrollwrap {
+    visibility: hidden;
+  }
+}
+/* the current page, inverted, at every width; the second pair covers a section's
+   index page, whose link is also the section label (navigation.indexes) */
+.md-sidebar--primary .md-nav__link--active,
+.md-sidebar--primary .md-nav__link--active:hover,
+.md-sidebar--primary .md-nav__item--section > .md-nav__container > .md-nav__link--active,
+.md-sidebar--primary .md-nav__item--section > .md-nav__container > .md-nav__link--active:hover {
+  background: var(--cs-inv-bg);
+  color: var(--cs-inv-fg);
+  font-weight: 600;
+}
+.md-sidebar .md-nav__link:focus-visible {
+  outline: 2px solid var(--cs-fg);
+  outline-offset: -2px;
+}
+.md-sidebar--primary .md-nav__link--active:is(:focus, :focus-visible),
+.md-sidebar--primary .md-nav__item--section > .md-nav__container > .md-nav__link--active:is(:focus, :focus-visible) {
+  color: var(--cs-inv-fg);
+  outline-color: var(--cs-inv-fg);
+}
+
+/* =========================================================
+   Right sidebar: headings of the current page
+   ========================================================= */
+.md-sidebar--secondary .md-nav__title {
+  font-weight: 600;
+  font-stretch: 85%;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--cs-muted);
+  background: transparent;
+  box-shadow: none;
+}
+.md-sidebar--secondary .md-nav__link {
+  margin: 0;
+  padding: 0.2rem 0 0.2rem 0.6rem;
+  border-left: 2px solid var(--cs-line);
+  color: var(--cs-muted);
+}
+.md-sidebar--secondary .md-nav__link:hover { color: var(--cs-fg); }
+.md-sidebar--secondary .md-nav__link--active,
+.md-sidebar--secondary .md-nav__link--passed.md-nav__link--active {
+  color: var(--cs-fg);
+  border-left-color: var(--cs-fg);
+  font-weight: 600;
+}
+
+/* =========================================================
+   Breadcrumbs (navigation.path)
+   ========================================================= */
+.md-path {
+  font-family: var(--md-code-font);
+  font-size: 0.6rem;
+  color: var(--cs-muted);
+}
+.md-path__link { color: var(--cs-muted); }
+.md-path__link:hover { color: var(--cs-fg); text-decoration: underline; }
+
+/* =========================================================
+   Typography
+   ========================================================= */
+.md-typeset {
+  font-size: 0.8rem;
+  line-height: 1.65;
+}
+/* running text about 70 characters wide; tables, code and diagrams keep the full width */
+.md-typeset > p,
+.md-typeset > ul,
+.md-typeset > ol { max-width: 70ch; }
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  color: var(--cs-fg);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.md-typeset h1 {
+  font-size: 2.6rem;
+  line-height: 1;
+  font-stretch: 75%;
+  margin: 0 0 0.5em;
+}
+/* standfirst: the first paragraph after the H1 */
+.md-typeset h1 + p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--cs-fg-2);
+}
+.md-typeset h2 {
+  font-size: 1.3rem;
+  line-height: 1.15;
+  font-stretch: 80%;
+  margin: 2.2em 0 0.7em;
+}
+.md-typeset h3 {
+  font-size: 1rem;
+  font-stretch: 88%;
+  margin: 1.8em 0 0.6em;
+}
+.md-typeset h4 { font-weight: 700; color: var(--cs-fg); }
+.md-typeset strong { color: var(--cs-fg); }
+
+/* links: underlined in running text */
+.md-typeset a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--cs-line-strong);
+  text-underline-offset: 0.18em;
+}
+.md-typeset a:hover { color: var(--cs-fg); text-decoration-color: currentcolor; }
+.md-typeset a:focus-visible { outline: 2px solid var(--cs-fg); outline-offset: 2px; }
+.md-typeset hr { border-bottom: 1px solid var(--cs-line); }
+.md-typeset mark { color: var(--cs-fg); }
+
+/* =========================================================
+   Code
+   ========================================================= */
+.md-typeset code { border-radius: 0; font-size: 0.82em; }
+.md-typeset :not(pre) > code {
+  padding: 0.08em 0.35em;
+  background: var(--cs-panel-2);
+  color: var(--cs-fg);
+}
+.md-typeset pre > code { border: 1px solid var(--cs-line); }
+.md-typeset .highlight { margin: 1.2em 0; }
+.md-clipboard { color: var(--cs-muted); }
+.md-clipboard:hover { color: var(--cs-fg); }
+
+/* =========================================================
+   Tables
+   ========================================================= */
+.md-typeset table:not([class]) {
+  border: 0;
+  border-radius: 0;
+  font-size: 0.76rem;
+  background: transparent;
+}
+.md-typeset table:not([class]) th {
+  background: transparent;
+  color: var(--cs-muted);
+  font-weight: 600;
+  border-bottom: 1px solid var(--cs-line-strong);
+}
+.md-typeset table:not([class]) td {
+  border-top: 1px solid var(--cs-line);
+  vertical-align: top;
+}
+.md-typeset table:not([class]) td:first-child { color: var(--cs-fg); }
+.md-typeset table:not([class]) tbody tr:hover { background: var(--cs-panel); box-shadow: none; }
+
+/* =========================================================
+   Admonitions: one look per kind
+   tip / note / info / success  -> blue
+   warning / question            -> amber
+   danger / failure / bug        -> red
+   example / abstract / quote    -> neutral
+   ========================================================= */
+.md-typeset .admonition,
+.md-typeset details {
+  --cs-adm-bg: var(--cs-panel);
+  --cs-adm-line: var(--cs-line-strong);
+  --cs-adm-title: var(--cs-fg);
+}
+/* [class] lifts specificity above Material's per-type border colours */
+.md-typeset :is(.admonition, details)[class] {
+  border: 1px solid var(--cs-adm-line);
+  border-radius: 0;
+  background: var(--cs-adm-bg);
+  box-shadow: none;
+  font-size: 0.76rem;
+  color: var(--cs-fg-2);
+}
+.md-typeset :is(.note, .info, .tip, .hint, .important, .success, .check, .done, .abstract, .summary, .tldr) {
+  --cs-adm-bg: var(--cs-tip-bg);
+  --cs-adm-line: var(--cs-tip-line);
+  --cs-adm-title: var(--cs-tip-title);
+}
+.md-typeset :is(.warning, .caution, .attention, .question, .help, .faq) {
+  --cs-adm-bg: var(--cs-warn-bg);
+  --cs-adm-line: var(--cs-warn-line);
+  --cs-adm-title: var(--cs-warn-title);
+}
+.md-typeset :is(.danger, .error, .failure, .fail, .missing, .bug) {
+  --cs-adm-bg: var(--cs-danger-bg);
+  --cs-adm-line: var(--cs-danger-line);
+  --cs-adm-title: var(--cs-danger-title);
+}
+.md-typeset :is(.admonition, details) > :is(.admonition-title, summary) {
+  background: transparent;
+  color: var(--cs-adm-title);
+  font-weight: 600;
+  font-size: 0.75rem;
+  font-stretch: 88%;
+}
+.md-typeset :is(.admonition, details) > :is(.admonition-title, summary)::before {
+  background-color: var(--cs-adm-title);
+}
+.md-typeset details > summary::after { color: var(--cs-adm-title); }
+.md-typeset .admonition > .admonition-title:only-child { margin-bottom: 0; }
+
+/* content tabs */
+.md-typeset .tabbed-labels > label { font-size: 0.72rem; }
+.md-typeset .tabbed-labels > label:hover { color: var(--cs-fg); }
+.md-typeset .tabbed-set > input:checked + label,
+.md-typeset .tabbed-labels > label.tabbed-labels__label--active { color: var(--cs-fg); }
+.md-typeset .tabbed-labels::before { background: var(--cs-fg); }
+
+/* =========================================================
+   Footer: previous / next as two framed links
+   ========================================================= */
+.md-footer { border-top: 1px solid var(--cs-line); }
+.md-footer__inner { gap: 0.6rem; padding: 0.8rem 0.4rem; }
+.md-footer__link {
+  flex: 1 1 0;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--cs-line);
+  background: var(--cs-panel);
+  opacity: 1;
+}
+.md-footer__link:hover { background: var(--cs-panel-2); opacity: 1; }
+.md-footer__link:focus-visible { outline: 2px solid var(--cs-fg); outline-offset: 2px; }
+.md-footer__direction {
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--cs-muted);
+  opacity: 1;
+}
+.md-footer__title { font-weight: 600; }
+.md-footer-meta {
+  background-color: var(--cs-bg);
+  border-top: 1px solid var(--cs-line);
+}
+.md-copyright,
+.md-copyright__highlight { color: var(--cs-muted); }
+.md-footer-meta.md-typeset a { color: var(--cs-fg-2); text-decoration: underline; }
+.md-footer-meta.md-typeset a:hover { color: var(--cs-fg); }
+
+/* =========================================================
+   Home page
+   ========================================================= */
+.md-typeset .cs-home {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 3.2rem;
+  margin: 1rem 0 2.8rem;
+}
+.md-typeset .cs-intro {
+  flex: 1 1 22rem;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.md-typeset .cs-intro h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 9vw, 3.6rem);
+  line-height: 1.05;
+  font-stretch: 72%;
+  overflow-wrap: break-word;
+}
+.md-typeset .cs-intro p {
+  margin: 0;
+  max-width: 26rem;
+  font-size: 0.9rem;
+  color: var(--cs-fg-2);
+}
+/* a label for Material's search toggle: clicking it opens the search overlay */
+.md-typeset .cs-intro .cs-search {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  max-width: 26rem;
+  min-height: 2.6rem;
+  padding: 0 0.7rem;
+  width: 100%;
+  border: 1px solid var(--cs-control-line);
+  background: var(--cs-panel);
+  color: var(--cs-muted);
+  font: inherit;
+  font-size: 0.8rem;
+  text-align: left;
+  cursor: pointer;
+}
+.md-typeset .cs-intro .cs-search:hover { background: var(--cs-panel-2); color: var(--cs-fg-2); }
+.md-typeset .cs-intro .cs-search:focus-visible { outline: 2px solid var(--cs-fg); outline-offset: 2px; }
+.md-typeset .cs-intro .cs-search kbd {
+  margin-left: auto;
+  font-size: 0.6rem;
+  color: var(--cs-muted);
+  background: transparent;
+  border: 1px solid var(--cs-line-strong);
+  box-shadow: none;
+}
+
+.md-typeset .cs-path {
+  flex: 1 1 19rem;
+  min-width: 0;
+}
+.md-typeset .cs-path h2,
+.md-typeset h2.cs-label,
+.md-typeset .cs-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  font-weight: 600;
+  font-stretch: 85%;
+  color: var(--cs-fg);
+}
+.md-typeset .cs-path ol {
+  margin: 0;
+  padding: 0 0 0 2rem;
+  list-style: decimal;
+  border-bottom: 1px solid var(--cs-line);
+}
+.md-typeset .cs-path ol > li {
+  margin: 0;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--cs-line);
+}
+.md-typeset .cs-path ol > li::marker {
+  font-family: var(--md-code-font);
+  font-size: 0.65rem;
+  color: var(--cs-muted);
+}
+.md-typeset .cs-path ol > li > p { margin: 0; }
+
+/* every section with all of its pages */
+.md-typeset .cs-sections { border-bottom: 1px solid var(--cs-line); }
+.md-typeset .cs-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+  gap: 0.4rem 2rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--cs-line);
+}
+.md-typeset .cs-section h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.05;
+  font-stretch: 78%;
+}
+.md-typeset .cs-section h3 a { text-decoration: none; color: var(--cs-fg); }
+.md-typeset .cs-section h3 a:hover { text-decoration: underline; }
+.md-typeset .cs-section p {
+  margin: 0.3rem 0 0;
+  font-size: 0.75rem;
+  color: var(--cs-muted);
+}
+.md-typeset .cs-section ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.75rem;
+}
+.md-typeset .cs-section ul > li { margin: 0; }
+.md-typeset .cs-section ul a { color: var(--cs-fg-2); }
+.md-typeset .cs-section ul a:hover { color: var(--cs-fg); }
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+@media screen and (max-width: 44.984375em) {
+  .md-typeset h1 { font-size: 2.1rem; }
+}
+@media screen and (max-width: 76.234375em) {
+  .md-nav--primary .md-nav__title[for="__drawer"] {
+    background-color: var(--cs-panel);
+    color: var(--cs-fg);
+    border-bottom: 1px solid var(--cs-line);
+  }
+  .md-nav--primary .md-nav__item { border-top-color: var(--cs-line); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .md-tabs__link { transition: none; }
+}
