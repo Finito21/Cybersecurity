@@ -1,6 +1,6 @@
 ---
 description: Push the current branch and open a pull request filled in from the PR template
-allowed-tools: Bash(git status*), Bash(git log*), Bash(git diff*), Bash(git branch*), Bash(git push -u origin HEAD), Bash(gh pr create *), Bash(gh pr view *), Bash(gh auth status*), Bash(python -m unittest*), Bash(python scripts/check_translations.py), Bash(mkdocs build*), Read, Grep, Glob
+allowed-tools: Bash(git status*), Bash(git log*), Bash(git diff*), Bash(git branch --show-current), Bash(git push -u origin HEAD), Bash(gh pr create *), Bash(gh pr view *), Bash(gh auth status*), Bash(python -m unittest*), Bash(python scripts/check_translations.py), Bash(mkdocs build*), Read, Grep, Glob
 ---
 
 Open a pull request for the current branch, with a description that follows `.github/pull_request_template.md`.
